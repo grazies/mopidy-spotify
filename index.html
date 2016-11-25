@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Mopidy-spotify by grazies</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Mopidy-spotify</h1>
+      <h2 class="project-tagline">Mopidy extension for playing music from Spotify</h2>
+      <a href="https://github.com/grazies/mopidy-spotify" class="btn">View on GitHub</a>
+      <a href="https://github.com/grazies/mopidy-spotify/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/grazies/mopidy-spotify/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <hr>
+
+<p>Mopidy-Spotify</p>
+
+<hr>
+
+<p>.. image:: <a href="https://img.shields.io/pypi/v/Mopidy-Spotify.svg?style=flat">https://img.shields.io/pypi/v/Mopidy-Spotify.svg?style=flat</a>
+    :target: <a href="https://pypi.python.org/pypi/Mopidy-Spotify/">https://pypi.python.org/pypi/Mopidy-Spotify/</a>
+    :alt: Latest PyPI version</p>
+
+<p>.. image:: <a href="https://img.shields.io/travis/mopidy/mopidy-spotify/develop.svg?style=flat">https://img.shields.io/travis/mopidy/mopidy-spotify/develop.svg?style=flat</a>
+    :target: <a href="https://travis-ci.org/mopidy/mopidy-spotify">https://travis-ci.org/mopidy/mopidy-spotify</a>
+    :alt: Travis CI build status</p>
+
+<p>.. image:: <a href="https://img.shields.io/coveralls/mopidy/mopidy-spotify/develop.svg?style=flat">https://img.shields.io/coveralls/mopidy/mopidy-spotify/develop.svg?style=flat</a>
+   :target: <a href="https://coveralls.io/r/mopidy/mopidy-spotify">https://coveralls.io/r/mopidy/mopidy-spotify</a>
+   :alt: Test coverage</p>
+
+<p><code>Mopidy &lt;http://www.mopidy.com/&gt;</code>_ extension for playing music from
+<code>Spotify &lt;http://www.spotify.com/&gt;</code>_.</p>
+
+<h1>
+<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependencies</h1>
+
+<ul>
+<li><p>A Spotify Premium subscription. Mopidy-Spotify <strong>will not</strong> work with Spotify
+Free, just Spotify Premium.</p></li>
+<li><p>A non-Facebook Spotify username and password. If you created your account
+through Facebook you'll need to create a "device password" to be able to use
+Mopidy-Spotify. Go to <a href="http://www.spotify.com/account/set-device-password/">http://www.spotify.com/account/set-device-password/</a>,
+login with your Facebook account, and follow the instructions.</p></li>
+<li><p><code>libspotify</code> &gt;= 12, &lt; 13. The official C library from the <code>Spotify
+developer site &lt;https://developer.spotify.com/technologies/libspotify/&gt;</code><em>.
+The package is available as <code>libspotify12</code> from
+<code>apt.mopidy.com &lt;http://apt.mopidy.com/&gt;</code>_</em>.</p></li>
+<li><p><code>pyspotify</code> &gt;= 2.0. The <code>libspotify</code> Python wrapper. The package is
+available as <code>python-spotify</code> from apt.mopidy.com or <code>pyspotify</code> on PyPI.
+See <a href="https://pyspotify.mopidy.com/en/latest/installation/">https://pyspotify.mopidy.com/en/latest/installation/</a> for how to install
+it and its dependencies on most platforms.</p></li>
+<li><p><code>Mopidy</code> &gt;= 1.1. The music server that Mopidy-Spotify extends.</p></li>
+</ul>
+
+<p>If you install Mopidy-Spotify from apt.mopidy.com, AUR, or Homebrew, these
+dependencies are installed automatically.</p>
+
+<h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h1>
+
+<p>Debian/Ubuntu/Raspbian: Install the <code>mopidy-spotify</code> package from
+<code>apt.mopidy.com &lt;http://apt.mopidy.com/&gt;</code>_::</p>
+
+<pre><code>sudo apt-get install mopidy-spotify
+</code></pre>
+
+<p>Arch Linux: Install the <code>mopidy-spotify</code> package from
+<code>AUR &lt;https://aur.archlinux.org/packages/mopidy-spotify/&gt;</code>_::</p>
+
+<pre><code>yaourt -S mopidy-spotify
+</code></pre>
+
+<p>OS X: Install the <code>mopidy-spotify</code> package from the
+<code>mopidy/mopidy &lt;https://github.com/mopidy/homebrew-mopidy&gt;</code>_ Homebrew tap::</p>
+
+<pre><code>brew install mopidy-spotify
+</code></pre>
+
+<p>Else: Install the dependencies listed above yourself, and then install the
+package from PyPI::</p>
+
+<pre><code>pip install Mopidy-Spotify
+</code></pre>
+
+<h1>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuration</h1>
+
+<p>Before starting Mopidy, you must add your Spotify Premium username and password
+to your Mopidy configuration file::</p>
+
+<pre><code>[spotify]
+username = alice
+password = secret
+</code></pre>
+
+<p>The following configuration values are available:</p>
+
+<ul>
+<li><p><code>spotify/enabled</code>: If the Spotify extension should be enabled or not.
+Defaults to <code>true</code>.</p></li>
+<li><p><code>spotify/username</code>: Your Spotify Premium username. You <em>must</em> provide this.</p></li>
+<li><p><code>spotify/password</code>: Your Spotify Premium password. You <em>must</em> provide this.</p></li>
+<li><p><code>spotify/bitrate</code>: Audio bitrate in kbps. <code>96</code>, <code>160</code>, or <code>320</code>.
+Defaults to <code>160</code>.</p></li>
+<li><p><code>spotify/volume_normalization</code>: Whether volume normalization is active or
+not. Defaults to <code>true</code>.</p></li>
+<li><p><code>spotify/timeout</code>: Seconds before giving up waiting for search results,
+etc. Defaults to <code>10</code>.</p></li>
+<li><p><code>spotify/allow_cache</code>: Whether to allow caching. The cache is stored in a
+"spotify" directory within Mopidy's <code>core/cache_dir</code>. Defaults to <code>true</code>.</p></li>
+<li><p><code>spotify/allow_network</code>: Whether to allow network access or not. Defaults
+to <code>true</code>.</p></li>
+<li><p><code>spotify/allow_playlists</code>: Whether or not playlists should be exposed.
+Defaults to <code>true</code>.</p></li>
+<li><p><code>spotify/search_album_count</code>: Maximum number of albums returned in search
+results. Number between 0 and 50. Defaults to 20.</p></li>
+<li><p><code>spotify/search_artist_count</code>: Maximum number of artists returned in search
+results. Number between 0 and 50. Defaults to 10.</p></li>
+<li><p><code>spotify/search_track_count</code>: Maximum number of tracks returned in search
+results. Number between 0 and 50. Defaults to 50.</p></li>
+<li><p><code>spotify/toplist_countries</code>: Comma separated list of two letter ISO country
+codes to get toplists for. Defaults to blank, which is interpreted as all
+countries that Spotify is available in.</p></li>
+<li><p><code>spotify/private_session</code>: Whether to use a private Spotify session. Turn
+on private session to disable sharing of played tracks with friends through
+the Spotify activity feed, Last.fm scrobbling, and Facebook. This only
+affects social sharing done by Spotify, not by other Mopidy extensions.
+Defaults to <code>false</code>.</p></li>
+</ul>
+
+<h1>
+<a id="project-resources" class="anchor" href="#project-resources" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Project resources</h1>
+
+<ul>
+<li>
+<code>Source code &lt;https://github.com/mopidy/mopidy-spotify&gt;</code>_</li>
+<li>
+<code>Issue tracker &lt;https://github.com/mopidy/mopidy-spotify/issues&gt;</code>_</li>
+</ul>
+
+<h1>
+<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Credits</h1>
+
+<ul>
+<li>Original author: <code>Stein Magnus Jodal &lt;https://github.com/jodal&gt;</code>__</li>
+<li>Current maintainer: <code>Stein Magnus Jodal &lt;https://github.com/jodal&gt;</code>__</li>
+<li>
+<code>Contributors &lt;https://github.com/mopidy/mopidy-spotify/graphs/contributors&gt;</code>_</li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/grazies/mopidy-spotify">Mopidy-spotify</a> is maintained by <a href="https://github.com/grazies">grazies</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
